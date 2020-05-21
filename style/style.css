@@ -7,9 +7,7 @@ td {
     height: 40px;
     background-color: darkgray;
 }
-/*.black {*/
-/*    background-color: black;*/
-/*}*/
-/*.white {*/
-/*    background-color: white;*/
-/*}*/
+
+.bomb {
+    background-color: darkred;
+}

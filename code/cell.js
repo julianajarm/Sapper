@@ -1,4 +1,8 @@
-class Cell {
+import {Field} from './field';
+import {Game} from './game';
+import {Renderer} from './renderer';
+
+export class Cell {
     isOpen = false;
     hasBomb = false;
 

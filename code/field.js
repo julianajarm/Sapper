@@ -1,4 +1,8 @@
-class Field {
+import {Cell} from './cell';
+import {Game} from './game';
+import {Renderer} from './renderer';
+
+export class Field {
     width = defaultMapWidth;
     height = defaultMapHeight;
     cells = [];
@@ -11,12 +15,18 @@ class Field {
             this.height = height;
         }
     }
-
-    fill() {
+    //plantedMap = [[x,y],[x,y]]
+    fill(plantedMap) {
         for (let i = 0; i < this.height; i++){
             let row = [];
             for(let j = 0; j < this.width; j++) {
-                row.push(new Cell(false));
+                let planted = false;
+                let found = plantedMap.find(el => el[0] === j && el[1] === i);
+                if(found !== undefined) {
+                    planted = true;
+                    Cell.hasBomb = true;
+                }
+                row.push(new Cell(planted));
             }
             this.cells.push(row);
         }
