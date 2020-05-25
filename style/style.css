@@ -5,9 +5,13 @@ td {
     border: 1px solid black;
     width: 40px;
     height: 40px;
-    background-color: darkgray;
+    background-color: cadetblue;
 }
 
 .bomb {
     background-color: darkred;
+}
+
+.opened {
+    background-color: darkcyan;
 }

@@ -1,6 +1,6 @@
-import {Cell} from './cell';
-import {Game} from './game';
-import {Renderer} from './renderer';
+import {Cell} from './cell.js';
+// import {Game} from './game';
+// import {Renderer} from './renderer';
 
 export class Field {
     width = defaultMapWidth;
@@ -24,7 +24,6 @@ export class Field {
                 let found = plantedMap.find(el => el[0] === j && el[1] === i);
                 if(found !== undefined) {
                     planted = true;
-                    Cell.hasBomb = true;
                 }
                 row.push(new Cell(planted));
             }

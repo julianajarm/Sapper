@@ -1,25 +1,24 @@
-import {Field} from './field';
-import {Game} from './game';
-import {Cell} from './cell';
+import {Field} from './field.js';
+// import {Game} from './game';
+import {Cell} from './cell.js';
 
 export class Renderer {
-    render() {
+    render(field) {
         let table = document.createElement('table');
-        let field = document.getElementById('field');
-        field.appendChild(table);
+        let fieldDiv = document.getElementById('field');
+        fieldDiv.appendChild(table);
 
-        for(let i = 0; i < 8; i++){
+        for(let i = 0; i < field.height; i++){
             let row = table.insertRow(i);
-            for(let j = 0; j < 8; j++){
-                row.insertCell(j);
-                if (Cell.hasBomb) {
-                    row.insertCell(j).classList.add('bomb');
+
+            for(let j = 0; j < field.width; j++){
+                let styleClass = 'empty';
+                let cell = field.cells[i][j];
+                if(cell.getHasBomb()){
+                    styleClass = 'bomb';
                 }
+                row.insertCell(j).classList.add(styleClass);
             }
         }
     }
 }
-
-
-let display = new Renderer();
-display.render();
