@@ -1,13 +1,7 @@
-// import {Field} from './field';
-// import {Game} from './game';
-// import {Renderer} from './renderer';
-
 export class Cell {
-    isOpen = false;
-    hasBomb = false;
-
     constructor(planted) {
         this.hasBomb = !!planted;
+        this.isOpen = false;
     }
 
     getHasBomb() {
@@ -21,6 +15,11 @@ export class Cell {
     open() {
         this.isOpen = true;
         return this.hasBomb;
+    }
+
+    bombsAround(){
+
+        return count;
     }
 
 }

@@ -5,13 +5,18 @@ td {
     border: 1px solid black;
     width: 40px;
     height: 40px;
-    background-color: cadetblue;
 }
 
 .bomb {
     background-color: darkred;
 }
 
-.opened {
+.empty {
     background-color: darkcyan;
+}
+.test {
+    background-color: chocolate;
+}
+.closed {
+    background-color: olive;
 }

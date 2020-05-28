@@ -1,12 +1,12 @@
 import {Cell} from './cell.js';
-// import {Game} from './game';
-// import {Renderer} from './renderer';
+
+const defaultMapWidth = 10;
+const defaultMapHeight = 10;
 
 export class Field {
     width = defaultMapWidth;
     height = defaultMapHeight;
     cells = [];
-
     constructor(width, height) {
         if (width > 0) {
             this.width = width;
@@ -15,6 +15,7 @@ export class Field {
             this.height = height;
         }
     }
+
     //plantedMap = [[x,y],[x,y]]
     fill(plantedMap) {
         for (let i = 0; i < this.height; i++){
@@ -31,7 +32,10 @@ export class Field {
         }
     }
 
+    cell(i, j) {
+        if (i < 0 || j < 0 || i >= this.height || j >= this.width) {
+            return undefined;
+        }
+        return this.cells[i][j];
+    }
 }
-
-const defaultMapWidth = 10;
-const defaultMapHeight = 10;
