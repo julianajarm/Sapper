@@ -1,10 +1,25 @@
 table {
     border-collapse: collapse;
+    margin: 50px auto;
 }
+
 td {
     border: 1px solid black;
     width: 40px;
     height: 40px;
+}
+
+span {
+    color: darkred;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: center;
+    padding: 10px;
+}
+
+.number {
+    color: white;
 }
 
 .bomb {
@@ -14,9 +29,11 @@ td {
 .empty {
     background-color: darkcyan;
 }
+
 .test {
     background-color: chocolate;
 }
+
 .closed {
     background-color: olive;
 }

@@ -34,19 +34,36 @@ export class Game {
 
     start(){
         this.field.fill(this.planting());
-        this.renderer.render(this.field, (cell, i, j) => this.makeMove(cell, i, j));
+        this.callRender();
     }
 
-    makeMove(cell, i, j){
+    makeMove(cell, i, j, action) {
+        if (action === 'rightClick') {
+            if (cell.getIsMarked()) {
+                cell.unmark();
+                this.callRender();
+            } else {
+                this.markCell(cell);
+            }
+        } else if (action === 'click') {
+            this.openCell(cell, i, j);
+        }
+    }
+
+    openCell(cell, i, j){
         let exploded = cell.open();
         if (exploded) {
             confirm('vi proebali');
             this.renderer.clear();
             return;
         }
-        this.countClosestBombs(i, j);
-        this.renderer.clear();
-        this.renderer.render(this.field, (cell, i, j) => this.makeMove(cell, i, j));
+        cell.bombsAround(this.countClosestBombs(i,j));
+        this.callRender();
+    }
+
+    markCell(cell) {
+        cell.mark();
+        this.callRender();
     }
 
     countClosestBombs(i, j){
@@ -59,6 +76,12 @@ export class Game {
                 }
             }
         }
+        return bombs;
+    }
+
+    callRender() {
+        this.renderer.clear();
+        this.renderer.render(this.field, (cell, i, j, action) => this.makeMove(cell, i, j, action));
     }
 }
 
