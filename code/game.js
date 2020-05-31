@@ -1,6 +1,8 @@
 import {Field} from './field.js';
 import {Renderer} from './renderer.js';
 
+const difficulty = 8;
+
 export class Game {
     bombsCount = difficulty;
 
@@ -48,12 +50,13 @@ export class Game {
         } else if (action === 'click') {
             this.openCell(cell, i, j);
         }
+        this.winGame();
     }
 
     openCell(cell, i, j){
         let exploded = cell.open();
         if (exploded) {
-            confirm('vi proebali');
+            alert('vi proebali');
             this.renderer.clear();
             return;
         }
@@ -61,9 +64,29 @@ export class Game {
         this.callRender();
     }
 
+    winGame() {
+        let count = 0;
+        for (let i = 0; i < this.field.height; i++) {
+            for (let j = 0; j< this.field.width; j++) {
+                if (!this.field.cells[i][j].getHasBomb() && !this.field.cells[i][j].getIsOpen()) {
+                    count += 1;
+                    break;
+                }
+            }
+        }
+        if (count === 0) {
+            alert('You win!');
+        }
+    }
+
     markCell(cell) {
-        cell.mark();
-        this.callRender();
+        if (cell.getIsMarked()) {
+            cell.unmark();
+            this.callRender();
+        } else {
+            cell.mark();
+            this.callRender();
+        }
     }
 
     countClosestBombs(i, j){
@@ -84,11 +107,8 @@ export class Game {
         this.renderer.render(this.field, (cell, i, j, action) => this.makeMove(cell, i, j, action));
     }
 }
-
-// todo по клику на пустой показывать, сколько соседей с бомбами
-// todo завершать игру при взрыве бомбы
-// todo счетчик, сколько осталось мин, возможно, также и секундомер
-const difficulty = 8;
+//todo показывать, сколько осталось отметить бомб
+//todo выигрыш: все бомбы помечены, а все ячейки без бомб открыты
 
 let game = new Game(6, 6);
 game.start();
