@@ -47,7 +47,7 @@ export class Game {
             } else {
                 this.markCell(cell);
             }
-        } else if (action === 'click') {
+        } else if (action === 'click' && !cell.getIsMarked()) {
             this.openCell(cell, i, j);
         }
         this.winGame();

@@ -26,9 +26,6 @@ export class Renderer {
             }
         }
     }
-    // renderCounter() {
-    //     let div = document.getElementById('counter')
-    // }
 
     clear(){
         document.getElementById('field').innerHTML = '';
