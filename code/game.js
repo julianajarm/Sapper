@@ -88,7 +88,7 @@ export class Game {
             this.callRender();
         }
     }
-
+//test commit
     countClosestBombs(i, j){
         let bombs = 0;
         for( let x = - 1; x <= 1; x++) {
