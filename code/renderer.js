@@ -18,7 +18,7 @@ export class Renderer {
                     event.preventDefault();
                     handleClick(cell, i, j, 'rightClick');
                 });
-                if (cell.getIsOpen()) {
+                if (cell.getIsOpen() && !cell.getHasBomb()) {
                     td.innerHTML = `<span class="number">${cell.bombsAround()}</span>`;
                 } else if (cell.getIsMarked()) {
                     td.innerHTML = `<span>B</span>`;

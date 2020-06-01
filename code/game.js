@@ -41,12 +41,7 @@ export class Game {
 
     makeMove(cell, i, j, action) {
         if (action === 'rightClick') {
-            if (cell.getIsMarked()) {
-                cell.unmark();
-                this.callRender();
-            } else {
-                this.markCell(cell);
-            }
+            this.markCell(cell);
         } else if (action === 'click' && !cell.getIsMarked()) {
             this.openCell(cell, i, j);
         }
@@ -56,11 +51,21 @@ export class Game {
     openCell(cell, i, j){
         let exploded = cell.open();
         if (exploded) {
-            alert('vi proebali');
-            this.renderer.clear();
+            this.openBombs();
             return;
         }
         cell.bombsAround(this.countClosestBombs(i,j));
+        this.callRender();
+    }
+
+    openBombs() {
+        for (let i = 0; i < this.field.height; i++){
+            for (let j = 0; j < this.field.width; j++) {
+                if(this.field.cell(i, j).getHasBomb()) {
+                    this.field.cell(i, j).open();
+                }
+            }
+        }
         this.callRender();
     }
 
@@ -76,6 +81,7 @@ export class Game {
         }
         if (count === 0) {
             alert('You win!');
+            this.openBombs();
         }
     }
 
@@ -88,7 +94,7 @@ export class Game {
             this.callRender();
         }
     }
-//test commit
+
     countClosestBombs(i, j){
         let bombs = 0;
         for( let x = - 1; x <= 1; x++) {
